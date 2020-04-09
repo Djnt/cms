@@ -1,0 +1,220 @@
+
+
+.row {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+.Toastify {
+  // width: 100vw;
+  // height: auto;
+  // position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 9999999;
+}
+
+.login {
+  text-align: center;
+  margin-top: 30vh;
+  padding: 40px;
+  background-color: white;
+  border-radius: 20px;
+  
+  input {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  button {
+    border: none;
+    font-weight: 500;
+    padding: 2px 30px 2px 30px;
+    border: 1px solid black;
+    border-radius: 10px;
+  }
+}
+
+.header {
+  height: 80px;
+  padding-top: 20px;
+  padding-right: 30px;
+
+  .right-block {
+    float: right;
+
+    button {
+      float: right;
+    }
+    .username {
+      float: right;
+      margin-right: 20px;
+      font-weight: 600;
+    }
+
+    button {
+      border: none;
+      background-color: transparent;
+      color: blue;
+      text-decoration: underline;
+    }
+
+
+  }
+}
+
+.add-client-form {
+  width: 100%;
+  padding-bottom: 40px;
+
+  input {
+    margin-right: 10px;
+    border: none;
+    border: 1px solid black;
+    padding: 0px 10px 0px 10px;
+    border-radius: 0px;
+    -moz-appearance: textfield;
+    width: 10%;
+  }
+
+  select {
+    margin-right: 10px;
+    width: 10%;
+  }
+
+  button {
+    border: none;
+    font-weight: 500;
+    padding: 2px 30px 2px 30px;
+    border: 1px solid black;
+    border-radius: 10px;
+  }
+}
+
+.clients-table {
+  width: 100%;
+  border: 1px solid gray;
+
+  thead {
+    background-color: #E5E5E5;
+    font-weight: 600;
+    text-align: center;
+    
+    td {
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+  }
+
+  tbody {
+    background-color: white;
+    td {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-left: 5px;
+
+      .side-controls-block {
+        position: absolute;
+        margin-left: -120px;
+        margin-top: -25px;
+        text-align: right;
+
+        i {
+          margin-left: 10px;
+          cursor: pointer;
+        }
+      }
+
+      input {
+        height: 22px;
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.palette {
+  position: fixed;
+
+  width: 300px;
+  height: 300px;
+  z-index: 1000;
+
+  .opt{
+    width: 150px;
+    cursor: pointer;
+    height: 75px;
+    float: left;
+    border: 1px solid black;
+  }
+}
+
+.history {
+
+  .header-title {
+    width: 100%;
+
+    h2 {
+      float: left;
+      margin-right: 50px;
+    }
+
+    h4 {
+      float: left;
+      padding-top: 12px;
+      margin-right: 15px;
+      font-size: 16px;
+    }
+    overflow: hidden;
+  }
+
+  .new-action-form {
+    width: 100%;
+    padding-top: 30px;
+
+    input[type=date] {
+      float: left;
+      width: 10%;
+      margin-right: 30px;
+      padding: 5px 5px 5px 5px;
+    }
+
+    input {
+      width: 70%;
+      margin-right: 30px;
+    }
+
+    button {
+      border: none;
+      font-weight: 500;
+      padding: 2px 30px 2px 30px;
+      border: 1px solid black;
+      border-radius: 10px;
+    }
+  }
+
+
+}
+
+.actions {
+
+  table {
+    width: 100%;
+    margin-top: 40px;
+    thead {
+      background-color: #E5E5E5;
+      font-weight: 600;
+
+      .short {
+        width: 15%;
+      }
+    }
+
+    td {
+      text-align: center;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+  }
+}

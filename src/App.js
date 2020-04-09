@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Header from "./Header.js";
+import Login from "./Login";
+import Client from "./Client";
+import Dashboard from "./Dashboard.js";
+import { ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+import 'font-awesome/css/font-awesome.min.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <div onClick={(e)=>toast.dismiss()}>
+          <div>
+            <Header triggerUpdate={this.triggerUpdate}/>
+            <Route exact path="/" render={(props) => <Dashboard {...props}/>} />
+            <Route path="/clients" render={(props) => <Dashboard {...props}/>} />
+            <Route path="/login" component={Login}/>
+            <Route path="/client/:id" component={Client}/>
+          </div> 
+          <ToastContainer autoClose={3000}/>
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;
