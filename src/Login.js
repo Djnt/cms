@@ -16,7 +16,7 @@ class Login extends Component {
       console.log(res)
       localStorage.setItem('Token', res.data.token)
       localStorage.setItem('User', res.data.data.email)
-      setTimeout(() => this.props.history.push('/clients'), 500)
+      setTimeout(() => this.props.history.push('/clients'), 1000)
     })
     .catch(err => {
       toast.error('Invalid email or password', {
