@@ -45,12 +45,12 @@ class Client extends Component {
           <h4>Project:</h4>
           <h2>{client.project}</h2>
           <h4>Department: </h4>
-          <h2>{client.department.name}</h2>
+          <h2>{client.department && client.department.name}</h2>
         </div>
 
         <div className='new-action-form'>
           <input type='date' placeholder='Date' value={this.state.date} onChange={e => this.setState({date: e.target.value})}></input>
-          <input type='text' placeholder='Action'value={this.state.action} onChange={e => this.setState({action: e.target.value})}></input>
+          <textarea rows='1' placeholder='Action'value={this.state.action} onChange={e => this.setState({action: e.target.value})}></textarea>
           <button onClick={this.createAction}>Add</button>
         </div>
       </div>
@@ -72,7 +72,7 @@ class Client extends Component {
       let { actions } = this.state.client
       if(!actions || !actions.length)
         actions = [res.data]
-      else actions.push(res.data)
+      else actions = [res.data, ...actions]
       this.setState({ client: {...this.state.client, actions} })
     })
     .catch(err => {
@@ -92,7 +92,7 @@ class Client extends Component {
       return <tr key={a.title}>
         <td>{a.date.split('T')[0]}</td>
         <td>{a.title.split(':')[0]}</td>
-        <td>{a.title.split(':')[1]}</td>
+        <td style={{ textAlign: 'left', paddingLeft: '20px' }}>{a.title.split(':')[1]}</td>
       </tr>
     })
   }

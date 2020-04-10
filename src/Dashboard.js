@@ -61,7 +61,7 @@ class Dashboard extends Component {
   renderClients = () => {
     const { clients } = this.state
     return clients.map((client, index) => {
-      const title = client.action ? client.action.title : 'nothing yet'
+      const title = client.action ? client.action.title.split(': ')[1] : 'nothing yet'
       const editing = this.state.editing.id === client.id
       const data = this.state.editing
       return (
@@ -95,12 +95,13 @@ class Dashboard extends Component {
             <td>
               { editing ?
                 <select placeholder='Department' onChange={e => this.applyEditValue(e.target.value, 'department_id')}>
+                  <option value={-1}>None</option>
                   {this.state.departments.map(dep => {
                     return <option key={'dep' + dep.id} value={dep.id}>{dep.name}</option>
                   })}
                 </select>
                 :
-                client.department.name
+                client.department && client.department.name
               }
             </td>
             <td>
@@ -124,7 +125,7 @@ class Dashboard extends Component {
                 client.start_date
               }
             </td>
-            <td><Link to={`/client/${client.id}`} className='invites-link'>{title}</Link></td>
+            <td>{client.action && <span style={{ fontWeight: '600' }}>{client.action.title.split(': ')[0] + ': '}</span>}<Link to={`/client/${client.id}`} className='invites-link'>{title}</Link></td>
           </tr>
       )
     })
@@ -144,7 +145,7 @@ class Dashboard extends Component {
       ...(editing.estimate && editing.estimate !== client.estimate && {estimate: editing.estimate}),
       ...(editing.budget && editing.budget !== client.budget && {budget: editing.budget}),
       ...(editing.start_date && editing.start_date !== client.start_date && {start_date: editing.start_date}),
-      ...(editing.department_id && editing.department_id !== client.department.id && {department_id: editing.department_id}),
+      ...(editing.department_id && {department_id: editing.department_id}),
     }
     if(Object.keys(args).length === 0){
       this.setState({ editing: {} })
@@ -181,22 +182,23 @@ class Dashboard extends Component {
   }
 
   createClient = () => {
-    const { name, project, department_id, estimate, budget, start_date } = this.state.newClientArgs
-    if(!name || !project || !estimate || !budget || !start_date)
+    const { name, project, department_id } = this.state.newClientArgs
+    if(!name || !project)
       return toast.error('Fields are missing!', {
         position: toast.POSITION.BOTTOM_CENTER,
         autoClose: false,
         hideProgressBar: true
       })
     
-    let dep_id = department_id
-    if(!department_id || department_id !== 0) {
-      dep_id = (this.state.departments[0] || {}).id
-    } 
+    let data = this.state.newClientArgs
+    if(department_id)
+      data.department_id = department_id
+    if(department_id === -1)
+      data.department_id = null
     
-    api.post('/clients', { client: {...this.state.newClientArgs, department_id: dep_id } })
+    api.post('/clients', { client: data })
     .then(res => {
-      this.setState({ page: 0, clients: [...this.state.clients, res.data] })
+      this.setState({ page: 0, clients: [res.data, ...this.state.clients] })
     })
     .catch(err => {
       toast.error('Unable to create client!', {
@@ -220,6 +222,7 @@ class Dashboard extends Component {
         <input type='text' placeholder='Name' value={name || ''} onChange={e => this.applyClientValue(e.target.value, 'name')} style={{ width: '15%' }}/>
         <input type='text' placeholder='Project' value={project || ''} onChange={e => this.applyClientValue(e.target.value, 'project')} style={{ width: '15%' }}/>
         <select placeholder='Department' onChange={e => this.applyClientValue(e.target.value, 'department_id')}>
+          <option value={-1}>None</option>
           {this.state.departments.map(dep => {
             return <option key={'dep' + dep.id} value={dep.id}>{dep.name}</option>
           })}
