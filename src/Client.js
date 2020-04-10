@@ -48,10 +48,10 @@ class Client extends Component {
           <h2>{client.department && client.department.name}</h2>
         </div>
 
-        <div className='new-action-form'>
-          <input type='date' placeholder='Date' value={this.state.date} onChange={e => this.setState({date: e.target.value})}></input>
-          <textarea rows='1' placeholder='Action'value={this.state.action} onChange={e => this.setState({action: e.target.value})}></textarea>
-          <button onClick={this.createAction}>Add</button>
+        <div className='new-action-form form-row align-items-center'>
+          <input className="form-control" type='date' placeholder='Date' value={this.state.date} onChange={e => this.setState({date: e.target.value})}></input>
+          <textarea className="form-control" rows='1' placeholder='Action'value={this.state.action} onChange={e => this.setState({action: e.target.value})}></textarea>
+          <button type="button" class="btn btn-primary" onClick={this.createAction}>Add</button>
         </div>
       </div>
       
@@ -101,7 +101,7 @@ class Client extends Component {
     return (
       <div className='actions col-12 col-md-8 offset-md-2'>
         {this.renderClient()}
-        <table border='1px'>
+        <table class="table table-hover table-bordered thead-dark">
           <thead>
             <tr>
               <td className='short'>Date</td>

@@ -16,22 +16,27 @@
 
 .login {
   text-align: center;
-  margin-top: 30vh;
-  padding: 40px;
+  margin-top: 20vh;
+  padding: 40px 40px 60px 40px;
   background-color: white;
   border-radius: 20px;
+  border: 1px solid rgba(128, 128, 128, 0.493);
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
   
+  h2 {
+    margin-bottom: 30px;
+  }
+
   input {
     width: 100%;
     margin-bottom: 20px;
   }
 
   button {
-    border: none;
-    font-weight: 500;
-    padding: 2px 30px 2px 30px;
-    border: 1px solid black;
+    font-weight: 600;
+    padding: 10px 30px 10px 30px;
     border-radius: 10px;
+    margin-top: 30px;
   }
 }
 
@@ -69,10 +74,7 @@
 
   input {
     margin-right: 10px;
-    border: none;
-    border: 1px solid black;
     padding: 0px 10px 0px 10px;
-    border-radius: 0px;
     -moz-appearance: textfield;
     width: 10%;
   }
@@ -83,11 +85,8 @@
   }
 
   button {
-    border: none;
-    font-weight: 500;
-    padding: 2px 30px 2px 30px;
-    border: 1px solid black;
-    border-radius: 10px;
+    font-weight: 600;
+    padding: 5px 30px 5px 30px;
   }
 }
 
@@ -140,8 +139,14 @@
       }
 
       input {
-        height: 22px;
-        font-size: 12px;
+        height: 32px;
+        font-size: 14px;
+        width: 95%;
+      }
+
+      input[type=date] {
+        min-width: 135px;
+        margin-right: 5px;
       }
     }
   }
@@ -187,8 +192,8 @@
     padding-top: 30px;
 
     input[type=date] {
-      float: left;
       width: 10%;
+      min-width: 135px;
       margin-right: 30px;
       padding: 5px 5px 5px 5px;
     }
@@ -196,16 +201,14 @@
     textarea {
       width: 70%;
       margin-right: 30px;
-      min-height: 37px;
+      min-height: 39px;
+      padding-top: 5px;
+      padding-bottom: 0px;
     }
 
     button {
-      border: none;
-      font-weight: 500;
-      padding: 2px 30px 2px 30px;
-      border: 1px solid black;
-      border-radius: 10px;
-      position: absolute;
+      font-weight: 600;
+      padding: 5px 30px 5px 30px;
     }
   }
 
@@ -218,7 +221,6 @@
     width: 100%;
     margin-top: 40px;
     thead {
-      background-color: #E5E5E5;
       font-weight: 600;
 
       .short {
@@ -230,6 +232,10 @@
       text-align: center;
       padding-top: 20px;
       padding-bottom: 20px;
+    }
+
+    tbody {
+      cursor: pointer;
     }
 
   }

@@ -30,9 +30,10 @@ class Login extends Component {
   render() {
     return (
       <div className='login col-12 col-md-2 offset-md-5'>
+        <h2>Login</h2>
         <input type='text' placeholder='Email Address' value={this.state.email} onChange={e => this.setState({email: e.target.value})}/>
         <input type='password' placeholder='Password' value={this.state.password} onChange={e => this.setState({password: e.target.value})}/>
-        <button onClick={this.submit}>Sign In</button>
+        <button type="button" class="btn btn-primary" onClick={this.submit}>Sign In</button>
       </div>
     );
   }

@@ -68,7 +68,7 @@ class Dashboard extends Component {
           <tr key={client.name + index} style={{backgroundColor: gamma[client.note]}}>
             <td>
               { editing ?
-                <input type='text' value={data.name} onChange={e => this.applyEditValue(e.target.value, 'name')}></input>
+                <input className="form-control" type='text' value={data.name} onChange={e => this.applyEditValue(e.target.value, 'name')}></input>
                 :
                 client.name
               }
@@ -87,14 +87,14 @@ class Dashboard extends Component {
             </td>
             <td>
               { editing ?
-                <input type='text' value={data.project} onChange={e => this.applyEditValue(e.target.value, 'project')}></input>
+                <input className="form-control" type='text' value={data.project} onChange={e => this.applyEditValue(e.target.value, 'project')}></input>
                 :
                 client.project
               }
             </td>
             <td>
               { editing ?
-                <select placeholder='Department' onChange={e => this.applyEditValue(e.target.value, 'department_id')}>
+                <select className="form-control" placeholder='Department' onChange={e => this.applyEditValue(e.target.value, 'department_id')}>
                   <option value={-1}>None</option>
                   {this.state.departments.map(dep => {
                     return <option key={'dep' + dep.id} value={dep.id}>{dep.name}</option>
@@ -106,21 +106,21 @@ class Dashboard extends Component {
             </td>
             <td>
               { editing ?
-                <input type='text' value={data.estimate} onChange={e => this.applyEditValue(e.target.value, 'estimate')}></input>
+                <input className="form-control" type='text' value={data.estimate} onChange={e => this.applyEditValue(e.target.value, 'estimate')}></input>
                 :
                 client.estimate
               }
             </td>
             <td>
               { editing ?
-                <input type='text' value={data.budget} onChange={e => this.applyEditValue(e.target.value, 'budget')}></input>
+                <input className="form-control" type='text' value={data.budget} onChange={e => this.applyEditValue(e.target.value, 'budget')}></input>
                 :
                 client.budget
               }
             </td>
             <td>
               { editing ?
-                <input type='date' value={data.start_date} onChange={e => this.applyEditValue(e.target.value, 'start_date')}></input>
+                <input className="form-control" type='date' value={data.start_date} onChange={e => this.applyEditValue(e.target.value, 'start_date')}></input>
                 :
                 client.start_date
               }
@@ -218,19 +218,19 @@ class Dashboard extends Component {
     const { name, project, department_id, estimate, budget, start_date } = this.state.newClientArgs
 
     return (
-      <div className='add-client-form'>
-        <input type='text' placeholder='Name' value={name || ''} onChange={e => this.applyClientValue(e.target.value, 'name')} style={{ width: '15%' }}/>
-        <input type='text' placeholder='Project' value={project || ''} onChange={e => this.applyClientValue(e.target.value, 'project')} style={{ width: '15%' }}/>
-        <select placeholder='Department' onChange={e => this.applyClientValue(e.target.value, 'department_id')}>
+      <div className='add-client-form form-row align-items-center'>
+        <input type='text' className="form-control" placeholder='Name' value={name || ''} onChange={e => this.applyClientValue(e.target.value, 'name')} style={{ width: '15%' }}/>
+        <input type='text' className="form-control" placeholder='Project' value={project || ''} onChange={e => this.applyClientValue(e.target.value, 'project')} style={{ width: '15%' }}/>
+        <select className="form-control" placeholder='Department' onChange={e => this.applyClientValue(e.target.value, 'department_id')}>
           <option value={-1}>None</option>
           {this.state.departments.map(dep => {
             return <option key={'dep' + dep.id} value={dep.id}>{dep.name}</option>
           })}
         </select>
-        <input type='number' placeholder='Est' value={estimate || ''} onChange={e => this.applyClientValue(e.target.value, 'estimate')}/>
-        <input type='number' placeholder='Bdjt' value={budget || ''} onChange={e => this.applyClientValue(e.target.value, 'budget')}/>
-        <input type='date' placeholder='Start Date' value={start_date || ''} onChange={e => this.applyClientValue(e.target.value, 'start_date')} style={{ width: '15%' }}/>
-        <button onClick={this.createClient}>Create</button>
+        <input className="form-control" type='number' placeholder='Est' value={estimate || ''} onChange={e => this.applyClientValue(e.target.value, 'estimate')}/>
+        <input className="form-control" type='number' placeholder='Bdjt' value={budget || ''} onChange={e => this.applyClientValue(e.target.value, 'budget')}/>
+        <input className="form-control" type='date' placeholder='Start Date' value={start_date || ''} onChange={e => this.applyClientValue(e.target.value, 'start_date')} style={{ width: '15%' }}/>
+        <button type="button" class="btn btn-primary" onClick={this.createClient}>Create</button>
       </div>
     )
   }
@@ -268,7 +268,7 @@ class Dashboard extends Component {
       <div className='dashboard col-12 col-md-8 offset-md-2'>
         {this.addNewUserForm()}
         {this.state.palette !== false && this.renderPalette()}
-        <table border='1px' className='clients-table'>
+        <table border='1px' className='clients-table table-hover'>
           <thead>
             <tr>
               <td>Client</td>
