@@ -49,8 +49,8 @@ class Client extends Component {
         </div>
 
         <div className='new-action-form form-row align-items-center'>
-          <input className="form-control" type='date' placeholder='Date' value={this.state.date} onChange={e => this.setState({date: e.target.value})}></input>
-          <textarea className="form-control" rows='1' placeholder='Action'value={this.state.action} onChange={e => this.setState({action: e.target.value})}></textarea>
+          <input required className="form-control" type='date' placeholder='Date' value={this.state.date} onChange={e => this.setState({date: e.target.value})}></input>
+          <textarea required className="form-control" rows='1' placeholder='Action'value={this.state.action} onChange={e => this.setState({action: e.target.value})}></textarea>
           <button type="button" class="btn btn-primary" onClick={this.createAction}>Add</button>
         </div>
       </div>
@@ -61,12 +61,12 @@ class Client extends Component {
   createAction = () => {
     if(!this.state.date || !this.state.action) {
       toast.error('Fields are missing!', {
-        position: toast.POSITION.BOTTOM_CENTER,
-        autoClose: false,
-        hideProgressBar: true
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: true,
+        hideProgressBar: true,
+        autoClose: 2000
       })
-      return
-    }
+    } else 
     api.post('/actions', { date: this.state.date, title: this.state.action, client_id: this.state.client.id })
     .then(res => {
       let { actions } = this.state.client

@@ -13,11 +13,11 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div onClick={(e)=>toast.dismiss()}>
+        <div>
           <div>
             <Header triggerUpdate={this.triggerUpdate}/>
-            <Route exact path="/" render={(props) => <Dashboard {...props}/>} />
-            <Route path="/clients" render={(props) => <Dashboard {...props}/>} />
+            <Route exact path="/" component={Dashboard} />
+            <Route path="/clients" component={Dashboard}/>
             <Route path="/login" component={Login}/>
             <Route path="/client/:id" component={Client}/>
           </div> 

@@ -20,9 +20,9 @@ class Login extends Component {
     })
     .catch(err => {
       toast.error('Invalid email or password', {
-        position: toast.POSITION.BOTTOM_CENTER,
-        autoClose: false,
-        hideProgressBar: true
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: true,
+        hideProgressBar: false
       })
     })
   }
@@ -31,9 +31,9 @@ class Login extends Component {
     return (
       <div className='login col-12 col-md-2 offset-md-5'>
         <h2>Login</h2>
-        <input type='text' placeholder='Email Address' value={this.state.email} onChange={e => this.setState({email: e.target.value})}/>
-        <input type='password' placeholder='Password' value={this.state.password} onChange={e => this.setState({password: e.target.value})}/>
-        <button type="button" class="btn btn-primary" onClick={this.submit}>Sign In</button>
+        <input required type='text' placeholder='Email Address' value={this.state.email} onChange={e => this.setState({email: e.target.value})}/>
+        <input required type='password' placeholder='Password' value={this.state.password} onChange={e => this.setState({password: e.target.value})}/>
+        <button type="button" disabled={!this.state.email || !this.state.password} class="btn btn-primary" onClick={this.submit}>Sign In</button>
       </div>
     );
   }

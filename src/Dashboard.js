@@ -38,7 +38,7 @@ class Dashboard extends Component {
         this.props.history.push("/login")
       else {
         toast.error('Unable to load clients!', {
-          position: toast.POSITION.BOTTOM_CENTER,
+          position: toast.POSITION.TOP_RIGHT,
           autoClose: false,
           hideProgressBar: true
         })
@@ -67,12 +67,7 @@ class Dashboard extends Component {
       return (
           <tr key={client.name + index} style={{backgroundColor: gamma[client.note]}}>
             <td>
-              { editing ?
-                <input className="form-control" type='text' value={data.name} onChange={e => this.applyEditValue(e.target.value, 'name')}></input>
-                :
-                client.name
-              }
-              <div className='side-controls-block'>
+              <div className={`side-controls-block ${editing && 'act' }`}>
                 <i className="fa fa-paint-brush" onClick={() => this.setState({ palette: (this.state.palette !== client.id ? client.id : false) })}></i>
                 {editing ? 
                   <Fragment>
@@ -84,6 +79,13 @@ class Dashboard extends Component {
                 }
                 <i className="fa fa-trash" onClick={() =>this.destroyItem(client.id)}></i>
               </div>
+            </td>
+            <td>
+              { editing ?
+                <input className="form-control" type='text' value={data.name} onChange={e => this.applyEditValue(e.target.value, 'name')}></input>
+                :
+                client.name
+              }
             </td>
             <td>
               { editing ?
@@ -159,7 +161,7 @@ class Dashboard extends Component {
     })
     .catch(err => {
       toast.error('Unable to update client!', {
-        position: toast.POSITION.BOTTOM_CENTER,
+        position: toast.POSITION.TOP_RIGHT,
         autoClose: false,
         hideProgressBar: true
       })
@@ -174,7 +176,7 @@ class Dashboard extends Component {
     })
     .catch(err => {
       toast.error('Unable to delete client!', {
-        position: toast.POSITION.BOTTOM_CENTER,
+        position: toast.POSITION.TOP_RIGHT,
         autoClose: false,
         hideProgressBar: true
       })
@@ -183,31 +185,29 @@ class Dashboard extends Component {
 
   createClient = () => {
     const { name, project, department_id } = this.state.newClientArgs
-    if(!name || !project)
-      return toast.error('Fields are missing!', {
-        position: toast.POSITION.BOTTOM_CENTER,
-        autoClose: false,
-        hideProgressBar: true
+    if(!name || !project) {
+      toast.error('Fields are missing!', {
+        position: toast.POSITION.TOP_RIGHT
       })
-    
-    let data = this.state.newClientArgs
-    if(department_id)
-      data.department_id = department_id
-    if(department_id === -1)
-      data.department_id = null
-    
-    api.post('/clients', { client: data })
-    .then(res => {
-      this.setState({ page: 0, clients: [res.data, ...this.state.clients] })
-    })
-    .catch(err => {
-      toast.error('Unable to create client!', {
-        position: toast.POSITION.BOTTOM_CENTER,
-        autoClose: false,
-        hideProgressBar: true
+    } else {
+      let data = this.state.newClientArgs
+      if(department_id)
+        data.department_id = department_id
+      if(department_id === -1)
+        data.department_id = null
+      
+      api.post('/clients', { client: data })
+      .then(res => {
+        this.setState({ page: 0, clients: [res.data, ...this.state.clients] })
       })
-    })
-
+      .catch(err => {
+        toast.error('Unable to create client!', {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: false,
+          hideProgressBar: true
+        })
+      })
+    }
   }
 
   applyClientValue = (data, field) => {
@@ -230,7 +230,7 @@ class Dashboard extends Component {
         <input className="form-control" type='number' placeholder='Est' value={estimate || ''} onChange={e => this.applyClientValue(e.target.value, 'estimate')}/>
         <input className="form-control" type='number' placeholder='Bdjt' value={budget || ''} onChange={e => this.applyClientValue(e.target.value, 'budget')}/>
         <input className="form-control" type='date' placeholder='Start Date' value={start_date || ''} onChange={e => this.applyClientValue(e.target.value, 'start_date')} style={{ width: '15%' }}/>
-        <button type="button" class="btn btn-primary" onClick={this.createClient}>Create</button>
+        <button type="button" className="btn btn-primary" onClick={this.createClient}>Create</button>
       </div>
     )
   }
@@ -244,7 +244,7 @@ class Dashboard extends Component {
     })
     .catch(err => {
       toast.error('Unable to cupdate colour!', {
-        position: toast.POSITION.BOTTOM_CENTER,
+        position: toast.POSITION.TOP_RIGHT,
         autoClose: false,
         hideProgressBar: true
       })
@@ -268,9 +268,10 @@ class Dashboard extends Component {
       <div className='dashboard col-12 col-md-8 offset-md-2'>
         {this.addNewUserForm()}
         {this.state.palette !== false && this.renderPalette()}
-        <table border='1px' className='clients-table table-hover'>
+        <table border='1px' className='clients-table table table-hover table-bordered thead-dark'>
           <thead>
             <tr>
+              <td></td>
               <td>Client</td>
               <td>Project</td>
               <td>Department</td>
