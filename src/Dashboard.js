@@ -230,7 +230,7 @@ class Dashboard extends Component {
         <input className="form-control" type='number' placeholder='Est' value={estimate || ''} onChange={e => this.applyClientValue(e.target.value, 'estimate')}/>
         <input className="form-control" type='number' placeholder='Bdjt' value={budget || ''} onChange={e => this.applyClientValue(e.target.value, 'budget')}/>
         <input className="form-control" type='date' placeholder='Start Date' value={start_date || ''} onChange={e => this.applyClientValue(e.target.value, 'start_date')} style={{ width: '15%' }}/>
-        <button type="button" className="btn btn-primary" onClick={this.createClient}>Create</button>
+        <button disabled={!this.state.newClientArgs.name || !this.state.newClientArgs.project} type="button" className="btn btn-primary" onClick={this.createClient}>Create</button>
       </div>
     )
   }

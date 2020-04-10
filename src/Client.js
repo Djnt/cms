@@ -49,9 +49,9 @@ class Client extends Component {
         </div>
 
         <div className='new-action-form form-row align-items-center'>
-          <input required className="form-control" type='date' placeholder='Date' value={this.state.date} onChange={e => this.setState({date: e.target.value})}></input>
-          <textarea required className="form-control" rows='1' placeholder='Action'value={this.state.action} onChange={e => this.setState({action: e.target.value})}></textarea>
-          <button type="button" class="btn btn-primary" onClick={this.createAction}>Add</button>
+          <input className="form-control" type='date' placeholder='Date' value={this.state.date} onChange={e => this.setState({date: e.target.value})}></input>
+          <textarea className="form-control" rows='1' placeholder='Action'value={this.state.action} onChange={e => this.setState({action: e.target.value})}></textarea>
+          <button disabled={!this.state.date || !this.state.action} type="button" class="btn btn-primary" onClick={this.createAction}>Add</button>
         </div>
       </div>
       
